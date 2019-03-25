@@ -57,7 +57,9 @@ public class MyDeque<E>{
 
 
   public void addFirst(E element){
-
+    if(isFull){
+      resize()
+    }
   }
 
 
