@@ -103,8 +103,17 @@ public class MyDeque<E>{
  }
 
 
-  //public E removeLast(){
-  //}
+  public E removeLast(){
+    errorIfEmpty();
+        int elementIndex = getStackIndex();
+        @SuppressWarnings("unchecked")
+        T objectRetrieved = (T) data[elementIndex];
+        // Make the element at the index null so there isn't a memory leak
+        data[elementIndex] = null;
+        endIndex = elementIndex;
+        size--;
+        return objectRetrieved;
+  }
 
 
   public E getFirst(){
@@ -120,6 +129,9 @@ public class MyDeque<E>{
     errorIfEmpty();
     return (E) data[start];
   }
+
+
+
   @SuppressWarnings("unchecked")
   private void reSize(){
     //if size is 0 make it one
