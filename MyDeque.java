@@ -75,6 +75,19 @@ public class MyDeque<E>{
 
 
   public void addLast(E element){
+    if(isFull){
+      resize();
+      end ++;
+      data[end] = element;
+    } else {
+      if(end == data.length - 1){
+        end = 0;
+        data[end] = element;
+      } else {
+        end++;
+        data[end] = element;
+      }
+    }
   }
 
 
@@ -137,3 +150,9 @@ public class MyDeque<E>{
     //copy all the starts into the beginning, then make the array in order again cuz y not
 
   }
+    private void errorIfEmpty() {
+    if (size == 0) {
+        throw new NoSuchElementException();
+    }
+  }
+}
