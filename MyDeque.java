@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -57,11 +59,11 @@ public class MyDeque<E>{
 
 
   public void addFirst(E element){
-    if(isFull){
+    if(isFull()){
       resize();
       //resize always sets start to 0
       start = data.length - 1;
-      data start = element;
+      data[start] = element;
     } else {
       start--;
       if(start > 0){
@@ -75,7 +77,7 @@ public class MyDeque<E>{
 
 
   public void addLast(E element){
-    if(isFull){
+    if(isFull()){
       resize();
       end ++;
       data[end] = element;
@@ -93,24 +95,31 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public E removeFirst(){
     errorIfEmpty();
-       int elementIndex = getQueueIndex();
+       int elementIndex = start;
        E objectRetrieved = (E) data[elementIndex];
        // Make the element at the index null so there isn't a memory leak
-       data[elementIndex] = null;
-       startIndex = elementIndex;
-       size--;
+       data[start] = null;
+       if(start == data.length - 1){
+         start = 0;
+       } else {
+         start ++;
+       }
        return objectRetrieved;
  }
 
 
   public E removeLast(){
     errorIfEmpty();
-        int elementIndex = getStackIndex();
+        int elementIndex = end;
         @SuppressWarnings("unchecked")
-        T objectRetrieved = (T) data[elementIndex];
+        E objectRetrieved = (E) data[elementIndex];
         // Make the element at the index null so there isn't a memory leak
-        data[elementIndex] = null;
-        endIndex = elementIndex;
+        data[end] = null;
+        if(end == 0){
+          end = data.length - 1;
+        } else {
+          end--;
+        }
         size--;
         return objectRetrieved;
   }
@@ -133,19 +142,19 @@ public class MyDeque<E>{
 
 
   @SuppressWarnings("unchecked")
-  private void reSize(){
+  private void resize(){
     //if size is 0 make it one
     if(size == 0){
-      data = new(E[])new Object[1];
+      data = (E[])new Object[1];
       start = 0;
       end = 0;
       return;
     }
     //make a copy array with double the size
-    E[] dataCopy = new(E[])new Object[size];
+    E[] dataCopy = (E[])new Object[size];
     if(size == 1){
-      dataCopy[start] = data[start]
-      data = new(E[])new Object[size * 2];
+      dataCopy[start] = data[start];
+      data = (E[])new Object[size * 2];
       start = 0;
       end = 1;
 
@@ -153,9 +162,9 @@ public class MyDeque<E>{
     }
 
     //for new cases, copy data into dataCopy
-    dataCopy = Arrays.copy(data);
+    dataCopy = Arrays.copyOf(data, data.length);
     //Then clear data();
-    data = new int[size *2];
+    data = (E[])new Object[size * 2];
     size = size * 2;
     //NOW see if end > start and such
     if(end > start){
