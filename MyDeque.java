@@ -58,7 +58,18 @@ public class MyDeque<E>{
 
   public void addFirst(E element){
     if(isFull){
-      resize()
+      resize();
+      //resize always sets start to 0
+      start = data.length - 1;
+      data start = element;
+    } else {
+      start--;
+      if(start > 0){
+      data[start] = element;
+    } else {
+      start += data.length;
+      data[start] = element;
+    }
     }
   }
 
