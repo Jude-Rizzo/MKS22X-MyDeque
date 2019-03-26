@@ -7,7 +7,7 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public MyDeque(){
     data = (E[])new Object[10];
-    size = 10;
+    size = 0;
     start = 0;
     end = 0;
   }
