@@ -90,21 +90,36 @@ public class MyDeque<E>{
     }
   }
 
-
-  //public E removeFirst(){
-//  }
+  @SuppressWarnings("unchecked")
+  public E removeFirst(){
+    errorIfEmpty();
+       int elementIndex = getQueueIndex();
+       E objectRetrieved = (E) data[elementIndex];
+       // Make the element at the index null so there isn't a memory leak
+       data[elementIndex] = null;
+       startIndex = elementIndex;
+       size--;
+       return objectRetrieved;
+ }
 
 
   //public E removeLast(){
   //}
 
 
-  //public E getFirst(){
-  //}
+  public E getFirst(){
+    errorIfEmpty();
+       return (E) data[start];
+  }
 
 
-  //public E getLast(){
-  //}
+
+
+
+  public E getLast(){
+    errorIfEmpty();
+    return (E) data[start];
+  }
   @SuppressWarnings("unchecked")
   private void reSize(){
     //if size is 0 make it one
