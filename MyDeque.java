@@ -59,6 +59,7 @@ public class MyDeque<E>{
 
 
   public void addFirst(E element){
+    if(element == null) throw new NullPointerException();
     if(isFull()){
       resize();
       //resize always sets start to 0
@@ -77,6 +78,11 @@ public class MyDeque<E>{
 
 
   public void addLast(E element){
+    if(element == null) throw new NullPointerException();
+    if(data[end] == null){
+      data[end] = element;
+      return;
+    }
     if(isFull()){
       resize();
       end ++;
@@ -154,7 +160,7 @@ public class MyDeque<E>{
     E[] dataCopy = (E[])new Object[size];
     if(size == 1){
       dataCopy[start] = data[start];
-      data = (E[])new Object[size * 2];
+      data = (E[])new Object[size * 2 + 1];
       start = 0;
       end = 1;
 
@@ -164,7 +170,7 @@ public class MyDeque<E>{
     //for new cases, copy data into dataCopy
     dataCopy = Arrays.copyOf(data, data.length);
     //Then clear data();
-    data = (E[])new Object[size * 2];
+    data = (E[])new Object[size * 2 + 1];
     size = size * 2;
     //NOW see if end > start and such
     if(end > start){
