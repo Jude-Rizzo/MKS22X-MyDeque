@@ -36,6 +36,38 @@ public class MyDeque<E>{
  }
 
 
+ public void addLast(E element)throws NullPointerException{
+   if(element == null) throw new NullPointerException("Can't add a null");
+   if(isFull()){
+     data = resize();
+   }
+
+   size += 1;
+   if(end < data.length - 1){
+     end++;
+     data[end] = element;
+     return;
+   }
+   if(end == data.length - 1){
+     end = 0;
+     data[end] = element;
+   }
+
+   if(end == start){
+     //first deal with the fact that if theyre not on the ends
+     if(start != data.length - 1){
+       start += 1;
+     } else {
+       //then end is 0
+       start =  0;
+     }
+
+   }
+ }
+
+
+
+
 public void addFirst(E element) throws NullPointerException{
 
   if(element == null){
