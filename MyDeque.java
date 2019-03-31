@@ -59,11 +59,11 @@ public void addFirst(E element) throws NullPointerException{
 //you have to now deal with the case if end = start after you adds
 if(end == start){
   //first deal with the fact that if theyre not on the ends
-  if(start != 0){
-    start -= 1;
+  if(end != 0){
+    end -= 1;
   } else {
     //then end is 0
-    start = data.length - 1;
+    end = data.length - 1;
   }
 
 }
@@ -74,6 +74,23 @@ if(end == start){
 
 //OK, so resize is the issue
 
+}
+
+
+public E getFirst() throws NoSuchElementException{
+  if(size == 0) throw new NoSuchElementException("que is empty");
+  return data[start];
+}
+
+public E removeFirst() throws NoSuchElementException{
+  E val = getFirst();
+  data[start] = null;
+  if(start == data.length - 1){
+    start = 0;
+    return val;
+  }
+  start ++;
+  return val;
 }
 
  public String toString(){
@@ -160,7 +177,7 @@ if(end == start){
    test.addFirst(1);
    System.out.println("Should be {1 }: " + test);
    //now loop addFirst
-   for(int i = 2; i < 21; i++){
+   for(int i = 2; i < 5; i++){
      test.addFirst(i);
    }
    System.out.println("testing loop, should go down from 20 to 0: " + test);

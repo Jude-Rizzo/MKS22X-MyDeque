@@ -10,9 +10,11 @@ public class Driver{
     System.out.println("\n");
     System.out.println("Testing the adds now");
     test.addFirst(1);
+    
+
     System.out.println("Should be {1 }: " + test);
     //now loop addFirst
-    for(int i = 2; i < 1001; i++){
+    for(int i = 2; i < 40; i++){
       test.addFirst(i);
     }
 
@@ -22,9 +24,17 @@ public class Driver{
       System.out.println("error was busted");
     }
 
+    //now generate the string
 
-    System.out.println("testing loop, should go down from 1001 to 0: " + test);
+    System.out.println("testing loop, should go down from 40 to 0: " + test);
+    //addFirst works
     //cool
 
+    //now do this
+    //for(int i = 0; i < 1001; i++)
+    //System.out.println(test.removeFirst() == 1000 - i);
+
   }
+
+//  System.out
 }
