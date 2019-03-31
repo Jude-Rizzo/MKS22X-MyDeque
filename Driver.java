@@ -12,9 +12,19 @@ public class Driver{
     test.addFirst(1);
     System.out.println("Should be {1 }: " + test);
     //now loop addFirst
-    for(int i = 2; i < 21; i++){
+    for(int i = 2; i < 1001; i++){
       test.addFirst(i);
     }
-    System.out.println("testing loop, should go down from 20 to 0: " + test);
+
+    try{
+      test.addFirst(null);
+    } catch(NullPointerException e){
+      System.out.println("error was busted");
+    }
+
+
+    System.out.println("testing loop, should go down from 1001 to 0: " + test);
+    //cool
+
   }
 }

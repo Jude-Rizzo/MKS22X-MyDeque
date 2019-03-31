@@ -68,9 +68,9 @@ if(end == start){
 
 }
 
-System.out.println(Arrays.toString(data));
-System.out.println("start : " + data[start]);
-System.out.println("end : " + data[end]);
+//System.out.println(Arrays.toString(data));
+//System.out.println("start : " + data[start]);
+//System.out.println("end : " + data[end]);
 
 //OK, so resize is the issue
 
@@ -108,19 +108,24 @@ System.out.println("end : " + data[end]);
    @SuppressWarnings("unchecked")
    E[] data = (E[]) new Object[size * 2 + 1];
    int index = 0;
+
+   //only case where start and end are equal are for size 1
+   if(start == end){
+     return data;
+   }
    if(start > end){
      for(int i = start; i < dataCopy.length; i++){
        //starts at 0;
        data[i - start] = dataCopy[i];
        index +=1;
 
-       System.out.println(Arrays.toString(data));
-       System.out.println("loop 1");
+       //System.out.println(Arrays.toString(data));
+       //System.out.println("loop 1");
      }
      for(int i = 0; i <= end; i++){
        data[i + index] = dataCopy[i];
-       System.out.println(Arrays.toString(data));
-       System.out.println("loop 2");
+       //System.out.println(Arrays.toString(data));
+       //System.out.println("loop 2");
      }
 
      start = 0;
@@ -131,8 +136,8 @@ System.out.println("end : " + data[end]);
     if(end > start){
      for(int i = start; i <= end; i++){
        data[i - start] = dataCopy[i];
-       System.out.println(Arrays.toString(data));
-       System.out.println("loop 3");
+       //System.out.println(Arrays.toString(data));
+       //System.out.println("loop 3");
      }
 
      start = 0;
