@@ -17,6 +17,11 @@ public class MyDeque<E>{
 
  }
 
+ private boolean isFull(){
+   if(size == data.length) return true;
+   return false;
+ }
+
 
 @SuppressWarnings("unchecked")
  public MyDeque(int length){
@@ -29,6 +34,27 @@ public class MyDeque<E>{
  public int size(){
    return size;
  }
+
+
+public void addFirst(E element) throws NullPointerException{
+
+  if(element == null){
+    throw new NullPointerException("Can't add a null");
+  }
+
+  if(isFull()){
+    resize();
+  }
+  size += 1;
+  if(start > 0){
+    start--;
+    data[start] = element;
+  }
+  if(start == 0){
+    start = data.length - 1;
+    data[start] = element;
+  }
+}
 
  public String toString(){
    if(size == 0){
@@ -55,11 +81,12 @@ public class MyDeque<E>{
 
  }
 
+
+
  private void resize(){
    E[] dataCopy = Arrays.copyOf(data, data.length);
    @SuppressWarnings("unchecked")
    E[] data = (E[]) new Object[size * 2 + 1];
-   size = size * 2 + 1;
    int index = 0;
    if(start > end){
      for(int i = start; i < data.length; i++){
@@ -84,6 +111,21 @@ public class MyDeque<E>{
      start = 0;
      end = end - start;
    }
+
+ }
+
+
+ public static void main(String[] ans){
+   //test const
+   System.out.println("Testing the empty constructor");
+   MyDeque<Integer> tester = new MyDeque<Integer>();
+   System.out.println("Should be empty {} : " + tester.toString());
+   MyDeque<Integer> test = new MyDeque<Integer>(10);
+   System.out.println("Should be empty {} : " + tester.toString());
+   System.out.println("\n");
+   System.out.println("Testing the adds now");
+   test.addFirst(1);
+   System.out.println(test);
 
  }
 
