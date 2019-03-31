@@ -90,6 +90,8 @@ public E removeFirst() throws NoSuchElementException{
     return val;
   }
   start ++;
+
+  size -=1;
   return val;
 }
 
@@ -97,6 +99,11 @@ public E removeFirst() throws NoSuchElementException{
    if(size == 0){
      return "{}";
    }
+
+   if(size == 1){
+     return "{" + data[end] + " }";
+   }
+   
    String ans = "{";
    if(start < end){
      for(int i = start; i <= end; i++){
@@ -167,22 +174,28 @@ public E removeFirst() throws NoSuchElementException{
 
  public static void main(String[] ans){
    //test const
-
-
-
+   System.out.println("Testing the empty constructor");
+   MyDeque<Integer> tester = new MyDeque<Integer>();
+   System.out.println("Should be empty {} : " + tester.toString());
    MyDeque<Integer> test = new MyDeque<Integer>(2);
-
+   System.out.println("Should be empty {} : " + tester.toString());
    System.out.println("\n");
    System.out.println("Testing the adds now");
    test.addFirst(1);
-   System.out.println("Should be {1 }: " + test);
-   //now loop addFirst
-   for(int i = 2; i < 5; i++){
-     test.addFirst(i);
-   }
-   System.out.println("testing loop, should go down from 20 to 0: " + test);
- }
+   test.addFirst(2);
 
+ //  System.out.println("Should be {1 }: " + test);
+   System.out.println(test);
+   System.out.println("size: " +  test.size());
+   System.out.println(test.removeFirst());
+   System.out.println(test);
+   System.out.println("\n");
+   System.out.println("size: " + test.size());
+   System.out.println(test.removeFirst());
+   System.out.println(test);
+   System.out.println(test.removeFirst());
+   System.out.println("size: " + test.size());
+}
 
 
 
