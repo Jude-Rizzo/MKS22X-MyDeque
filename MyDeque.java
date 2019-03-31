@@ -86,6 +86,7 @@ public E removeFirst() throws NoSuchElementException{
   E val = getFirst();
   data[start] = null;
   if(start == data.length - 1){
+    size -=1;
     start = 0;
     return val;
   }
@@ -103,9 +104,9 @@ public E removeFirst() throws NoSuchElementException{
    if(size == 1){
      return "{" + data[end] + " }";
    }
-   
+
    String ans = "{";
-   if(start < end){
+   if(start <= end){
      for(int i = start; i <= end; i++){
 
        if(data[i] != null) ans += data[i] + " ";
@@ -135,7 +136,12 @@ public E removeFirst() throws NoSuchElementException{
 
    //only case where start and end are equal are for size 1
    if(start == end){
-     return data;
+     if(size == 0) return data;
+     if(size == 1){
+       data[0] = dataCopy[start];
+       end = 0;
+       start = 0;
+     }
    }
    if(start > end){
      for(int i = start; i < dataCopy.length; i++){
