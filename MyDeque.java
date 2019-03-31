@@ -44,6 +44,7 @@ public void addFirst(E element) throws NullPointerException{
 
   if(isFull()){
     data = resize();
+
   }
   size += 1;
   if(start > 0){
@@ -58,14 +59,20 @@ public void addFirst(E element) throws NullPointerException{
 //you have to now deal with the case if end = start after you adds
 if(end == start){
   //first deal with the fact that if theyre not on the ends
-  if(end != 0){
-    end -= 1;
+  if(start != 0){
+    start -= 1;
   } else {
     //then end is 0
-    end = data.length - 1;
+    start = data.length - 1;
   }
 
 }
+
+System.out.println(Arrays.toString(data));
+System.out.println("start : " + data[start]);
+System.out.println("end : " + data[end]);
+
+//OK, so resize is the issue
 
 }
 
@@ -106,24 +113,32 @@ if(end == start){
        //starts at 0;
        data[i - start] = dataCopy[i];
        index +=1;
+
+       System.out.println(Arrays.toString(data));
+       System.out.println("loop 1");
      }
      for(int i = 0; i <= end; i++){
        data[i + index] = dataCopy[i];
+       System.out.println(Arrays.toString(data));
+       System.out.println("loop 2");
      }
 
      start = 0;
      end = end + index;
      //copy to end ad the from start
-   }
+   } else {
 
-   if(end >= start){
+    if(end > start){
      for(int i = start; i <= end; i++){
        data[i - start] = dataCopy[i];
+       System.out.println(Arrays.toString(data));
+       System.out.println("loop 3");
      }
 
      start = 0;
      end = end - start;
    }
+ }
    return data;
  }
 
