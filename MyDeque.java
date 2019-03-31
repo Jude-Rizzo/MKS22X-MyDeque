@@ -43,17 +43,30 @@ public void addFirst(E element) throws NullPointerException{
   }
 
   if(isFull()){
-    resize();
+    data = resize();
   }
   size += 1;
   if(start > 0){
     start--;
     data[start] = element;
-  }
+  } else {
   if(start == 0){
     start = data.length - 1;
     data[start] = element;
   }
+}
+//you have to now deal with the case if end = start after you adds
+if(end == start){
+  //first deal with the fact that if theyre not on the ends
+  if(end != 0){
+    end -= 1;
+  } else {
+    //then end is 0
+    end = data.length - 1;
+  }
+
+}
+
 }
 
  public String toString(){
@@ -83,13 +96,13 @@ public void addFirst(E element) throws NullPointerException{
 
 
 
- private void resize(){
+ private E[] resize(){
    E[] dataCopy = Arrays.copyOf(data, data.length);
    @SuppressWarnings("unchecked")
    E[] data = (E[]) new Object[size * 2 + 1];
    int index = 0;
    if(start > end){
-     for(int i = start; i < data.length; i++){
+     for(int i = start; i < dataCopy.length; i++){
        //starts at 0;
        data[i - start] = dataCopy[i];
        index +=1;
@@ -111,22 +124,26 @@ public void addFirst(E element) throws NullPointerException{
      start = 0;
      end = end - start;
    }
-
+   return data;
  }
 
 
  public static void main(String[] ans){
    //test const
-   System.out.println("Testing the empty constructor");
-   MyDeque<Integer> tester = new MyDeque<Integer>();
-   System.out.println("Should be empty {} : " + tester.toString());
-   MyDeque<Integer> test = new MyDeque<Integer>(10);
-   System.out.println("Should be empty {} : " + tester.toString());
+
+
+
+   MyDeque<Integer> test = new MyDeque<Integer>(2);
+
    System.out.println("\n");
    System.out.println("Testing the adds now");
    test.addFirst(1);
-   System.out.println(test);
-
+   System.out.println("Should be {1 }: " + test);
+   //now loop addFirst
+   for(int i = 2; i < 21; i++){
+     test.addFirst(i);
+   }
+   System.out.println("testing loop, should go down from 20 to 0: " + test);
  }
 
 
