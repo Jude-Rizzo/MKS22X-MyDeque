@@ -97,20 +97,13 @@ public E removeFirst() {
   return out;
 }
 
-  public E removeLast(){
-    if (size == 0){
-      throw new NoSuchElementException();
-    }
-    E ans = data[end];
-    if (end == 0){
-      end = size-1;
-    }
-    else{
-      end--;
-    }
-    size--;
-    return ans;
-  }
+public E removeLast() {
+  if (size == 0) throw new NoSuchElementException();
+  E out = data[--end];
+  if (end == 0) end = capacity;
+  size--;
+  return out;
+}
 
   public String toString() {
 		String ans = "{";
