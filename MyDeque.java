@@ -252,5 +252,7 @@ public E removeFirst() throws NoSuchElementException{
    System.out.println(test);
    //System.out.println(test.removeFirst());
   // System.out.println("size: " + test.size());
+
+  
   }
 }
