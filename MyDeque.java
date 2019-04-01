@@ -57,7 +57,7 @@ public class MyDeque<E>{
 
  public void addLast(E element) {
    if (element == null) throw new NullPointerException();
-   if (size == fits) // we are full
+   if (size == fits)
      resize();
 
    if (end == fits) {
@@ -89,20 +89,14 @@ public E getFirst() throws NoSuchElementException{
   return data[start];
 }
 
-public E removeFirst(){
-    if (size == 0){
-      throw new NoSuchElementException();
-    }
-    E ans = data[start];
-    if (start == size-1){
-      start = 0;
-    }
-    else{
-      start++;
-    }
-    size--;
-    return ans;
-  }
+public E removeFirst() {
+  if (size == 0) throw new NoSuchElementException();
+  E out = data[start++];
+  if (start == fits) start = 0;
+  size--;
+  return out;
+}
+
   public E removeLast(){
     if (size == 0){
       throw new NoSuchElementException();
