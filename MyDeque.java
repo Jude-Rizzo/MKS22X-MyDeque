@@ -3,7 +3,7 @@ import java.util.*;
 
 public class MyDeque<E>{
   private E[] data;
-  private int size, start, end;
+  public int size, start, end;
   //initialize those variables like a beast
 
 
@@ -41,6 +41,11 @@ public class MyDeque<E>{
    if(isFull()){
      data = resize();
    }
+   if(data[end] == null){
+     data[end] = element;
+     size++;
+     return;
+   }
 
    size += 1;
    if(end < data.length - 1){
@@ -72,6 +77,12 @@ public void addFirst(E element) throws NullPointerException{
 
   if(element == null){
     throw new NullPointerException("Can't add a null");
+  }
+
+  if(data[start] == null){
+    data[start] = element;
+    size++;
+    return;
   }
 
   if(isFull()){
@@ -229,36 +240,17 @@ public E removeFirst() throws NoSuchElementException{
 
  public static void main(String[] ans){
    //test const
-   System.out.println("Testing the empty constructor");
-   MyDeque<Integer> tester = new MyDeque<Integer>();
-   System.out.println("Should be empty {} : " + tester.toString());
    MyDeque<Integer> test = new MyDeque<Integer>(2);
-   System.out.println("Should be empty {} : " + tester.toString());
-   System.out.println("\n");
-   System.out.println("Testing the adds now");
+   System.out.println(test);
+   test.addLast(0);
+   System.out.println(test.start);
+   System.out.println(test.end);
+    System.out.println(test);
    test.addFirst(1);
-   test.addFirst(2);
-
- //  System.out.println("Should be {1 }: " + test);
-   System.out.println(test);
-   System.out.println("size: " +  test.size());
-   System.out.println(test.removeFirst());
-   System.out.println(test);
-   System.out.println("\n");
-   System.out.println("size: " + test.size());
-   System.out.println(test.removeFirst());
-   System.out.println(test);
-
-   System.out.println("\n");
-   System.out.println("size: " + test.size());
-   System.out.println(test);
-   for(int i = 0; i < 10; i++){
-     test.addLast(i);
-   }
-   System.out.println(test);
-   test.removeLast();
+   System.out.println(test.start);
+   System.out.println(test.end);
    System.out.println(test);
    //System.out.println(test.removeFirst());
   // System.out.println("size: " + test.size());
-}
+  }
 }
