@@ -78,16 +78,17 @@ public class MyDeque<E>{
 //OK, so resize is the issue
 
 
-public E getLast() throws NoSuchElementException{
-  if(size == 0) throw new NoSuchElementException("que is empty");
-  return data[end];
+public E getLast() {
+  if (size == 0) throw new NoSuchElementException();
+  return data[end-1];
 }
 
 
-public E getFirst() throws NoSuchElementException{
-  if(size == 0) throw new NoSuchElementException("que is empty");
-  return data[start];
-}
+public E getFirst() {
+		if (size == 0) throw new NoSuchElementException();
+		return data[start];
+	}
+
 
 public E removeFirst() {
   if (size == 0) throw new NoSuchElementException();
@@ -100,7 +101,7 @@ public E removeFirst() {
 public E removeLast() {
   if (size == 0) throw new NoSuchElementException();
   E out = data[--end];
-  if (end == 0) end = capacity;
+  if (end == 0) end = fits;
   size--;
   return out;
 }
