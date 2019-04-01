@@ -2,26 +2,26 @@ import java.util.*;
 
 public class Calculator{
 
-  //check if input is a mathematical sign
-  private static boolean isMath(String s) {
+
+  private static boolean operator(String s) {
     return (s.equals("*") || s.equals("/") || s.equals("+") || s.equals("-") || s.equals("%"));
   }
-  //do the math
-  private static double doMath(String s, double x, double y){
+
+  private static double calculate(String s, double a, double b){
     if (s.equals("*")){
-      return x * y;
+      return a * b;
     }
     if (s.equals("/")){
-      return x / y;
+      return a / b;
     }
     if (s.equals("+")){
-      return x + y;
+      return a + b;
     }
     if (s.equals("-")){
-      return x - y;
+      return a - b;
     }
     else if (s.equals("%")){
-      return x % y;
+      return a % b;
     }
     return 0.0;
   }
@@ -32,16 +32,16 @@ public class Calculator{
     String[] sc = s.split(" ");
     Deque<Double> deq = new Deque<Double>(sc.length);
     for (int i = 0; i < sc.length; i++){
-      if (isMath(sc[i])){
+      if (operator(sc[i])){
         double num1 = deq.removeLast();
         double num2 = deq.removeLast();
-        deq.addLast(doMath(sc[i],num2,num1));
-        //System.out.println("math num:" + deq.toString());
+        deq.addLast(calculate(sc[i],num2,num1));
+
       }
       else{
-        //System.out.println(sc[i]);
+
         deq.addLast(Double.parseDouble(sc[i]));
-        //System.out.println("regular num:" + deq.toString());
+      
       }
     }
     return deq.getLast();
