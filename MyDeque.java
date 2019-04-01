@@ -123,38 +123,40 @@ public E getLast() throws NoSuchElementException{
   return data[end];
 }
 
-public E removeLast() throws NoSuchElementException{
-  E val = getFirst();
-  data[end] = null;
-  if(end == 0){
-    end = data.length - 1;
-    size--;
-    return val;
-  }
-
-  end--;
-  size --;
-  return val;
-}
 
 public E getFirst() throws NoSuchElementException{
   if(size == 0) throw new NoSuchElementException("que is empty");
   return data[start];
 }
 
-public E removeFirst() throws NoSuchElementException{
-  E val = getFirst();
-  data[start] = null;
-  if(start == data.length - 1){
-    size -=1;
-    start = 0;
-    return val;
+public E removeFirst(){
+    if (size == 0){
+      throw new NoSuchElementException();
+    }
+    E og = data[start];
+    if (start == size-1){
+      start = 0;
+    }
+    else{
+      start++;
+    }
+    size--;
+    return og;
   }
-  start ++;
-
-  size -=1;
-  return val;
-}
+  public E removeLast(){
+    if (size == 0){
+      throw new NoSuchElementException();
+    }
+    E og = data[end];
+    if (end == 0){
+      end = size-1;
+    }
+    else{
+      end--;
+    }
+    size--;
+    return og;
+  }
 
  public String toString(){
    if(size == 0){
