@@ -240,19 +240,25 @@ public E removeFirst() throws NoSuchElementException{
 
  public static void main(String[] ans){
    //test const
-   MyDeque<Integer> test = new MyDeque<Integer>(2);
+   MyDeque<Integer> test = new MyDeque<Integer>();
    System.out.println(test);
    test.addLast(0);
-   System.out.println(test.start);
-   System.out.println(test.end);
-    System.out.println(test);
-   test.addFirst(1);
-   System.out.println(test.start);
-   System.out.println(test.end);
+   test.addLast(1);
+   for(int i = 2; i < 20; i ++){
+     test.addFirst(i);
+   }
    System.out.println(test);
+   
+   for(int i = 0; i < 20; i ++){
+     test.removeFirst();
+   }
+
+
+   System.out.println(test);
+
    //System.out.println(test.removeFirst());
   // System.out.println("size: " + test.size());
 
-  
+
   }
 }
