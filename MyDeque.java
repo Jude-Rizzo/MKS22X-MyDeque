@@ -30,7 +30,7 @@ public class MyDeque<E>{
    size = 0;
    start = 0;
    end = 0;
-   fits = length
+   fits = length;
  }
 
  public int size(){
@@ -118,35 +118,27 @@ public E removeFirst(){
     return ans;
   }
 
- public String toString(){
-   if(size == 0){
-     return "{}";
-   }
-
-   if(size == 1){
-     return "{" + data[end] + " }";
-   }
-
-   String ans = "{";
-   if(start <= end){
-     for(int i = start; i <= end; i++){
-
-       if(data[i] != null) ans += data[i] + " ";
-
-     } return ans + " }";
-   }
-
-   if(start > end){
-     for(int i = start; i < data.length; i++){
-       if(data[i] != null) ans += data[i] + " ";
-     }
-     for(int i = 0; i <= end; i++){
-       if(data[i] != null) ans += data[i] + " ";
-     }
-   }
-   return ans + "}";
-
- }
+  public String toString() {
+		String ans = "{";
+		if (size == 0) {}
+		else if (start < end) {
+			for (int i = start; i < end; i++) {
+				ans +=(data[i].toString());
+				ans += (" ");
+			}
+		} else {
+			for (int i = start; i < fits; i++) {
+				ans += (data[i].toString());
+				ans += (" ");
+			}
+			for (int i = 0; i < end; i++) {
+				ans += data[i].toString();
+				ans += (" ");
+			}
+		}
+		ans += "}";
+		return ans;
+	}
 
 
 
