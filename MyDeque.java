@@ -3,7 +3,7 @@ import java.util.*;
 
 public class MyDeque<E>{
   private E[] data;
-  public int size, start, end;
+  public int size, start, end, fits;
   //initialize those variables like a beast
 
 
@@ -14,6 +14,7 @@ public class MyDeque<E>{
    size = 0;
    start = 0;
    end = 0;
+   fits = 10;
 
  }
 
@@ -29,6 +30,7 @@ public class MyDeque<E>{
    size = 0;
    start = 0;
    end = 0;
+   fits = length
  }
 
  public int size(){
