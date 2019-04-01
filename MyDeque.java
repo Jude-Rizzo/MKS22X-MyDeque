@@ -248,7 +248,7 @@ public E removeFirst() throws NoSuchElementException{
      test.addFirst(i);
    }
    System.out.println(test);
-   
+
    for(int i = 0; i < 20; i ++){
      test.removeFirst();
    }

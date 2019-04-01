@@ -30,7 +30,7 @@ public class Calculator{
     */
   public static double eval(String s){
     String[] sc = s.split(" ");
-    MyDeque<Double> deq = new MyDeque<Double>(sc.length);
+    Deque<Double> deq = new Deque<Double>(sc.length);
     for (int i = 0; i < sc.length; i++){
       if (isMath(sc[i])){
         double num1 = deq.removeLast();
