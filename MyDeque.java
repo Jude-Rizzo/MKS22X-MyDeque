@@ -91,7 +91,7 @@ public E removeFirst(){
     if (size == 0){
       throw new NoSuchElementException();
     }
-    E og = data[start];
+    E ans = data[start];
     if (start == size-1){
       start = 0;
     }
@@ -99,13 +99,13 @@ public E removeFirst(){
       start++;
     }
     size--;
-    return og;
+    return ans;
   }
   public E removeLast(){
     if (size == 0){
       throw new NoSuchElementException();
     }
-    E og = data[end];
+    E ans = data[end];
     if (end == 0){
       end = size-1;
     }
@@ -113,7 +113,7 @@ public E removeFirst(){
       end--;
     }
     size--;
-    return og;
+    return ans;
   }
 
  public String toString(){
@@ -148,53 +148,25 @@ public E removeFirst(){
 
 
 
- private E[] resize(){
-   E[] dataCopy = Arrays.copyOf(data, data.length);
+ private void resize() {
    @SuppressWarnings("unchecked")
-   E[] data = (E[]) new Object[size * 2 + 1];
-   int index = 0;
+   E[] copy = (E[])new Object[size * 2 + 1];
+   int j = -1;
 
-   //only case where start and end are equal are for size 1
-   if(start == end){
-     if(size == 0) return data;
-     if(size == 1){
-       data[0] = dataCopy[start];
-       end = 0;
-       start = 0;
-     }
-   }
-   if(start > end){
-     for(int i = start; i < dataCopy.length; i++){
-       //starts at 0;
-       data[i - start] = dataCopy[i];
-       index +=1;
-
-       //System.out.println(Arrays.toString(data));
-       //System.out.println("loop 1");
-     }
-     for(int i = 0; i <= end; i++){
-       data[i + index] = dataCopy[i];
-       //System.out.println(Arrays.toString(data));
-       //System.out.println("loop 2");
-     }
-
-     start = 0;
-     end = end + index;
-     //copy to end ad the from start
+   if (start < end) {
+     for (int i = start; i < end; i++)
+       copy[++j] = data[i];
    } else {
-
-    if(end > start){
-     for(int i = start; i <= end; i++){
-       data[i - start] = dataCopy[i];
-       //System.out.println(Arrays.toString(data));
-       //System.out.println("loop 3");
-     }
-
-     start = 0;
-     end = end - start;
+     for (int i = start; i < data.length; i++)
+       copy[++j] = data[i];
+     for (int i = 0; i < end; i++)
+       copy[++j] = data[i];
    }
- }
-   return data;
+
+
+   data = copy;
+   start = 0;
+   end = j+1;
  }
 
 
