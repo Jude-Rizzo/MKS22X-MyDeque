@@ -36,80 +36,38 @@ public class MyDeque<E>{
  }
 
 
- public void addLast(E element)throws NullPointerException{
-   if(element == null) throw new NullPointerException("Can't add a null");
-   if(isFull()){
-     data = resize();
-   }
-   if(data[end] == null){
-     data[end] = element;
-     size++;
-     return;
-   }
+ public void addFirst(E element) {
+   if (element == null) throw new NullPointerException();
+   if (size == data.length)
+     resize();
 
-   size += 1;
-   if(end < data.length - 1){
-     end++;
-     data[end] = element;
-     return;
-   }
-   if(end == data.length - 1){
-     end = 0;
-     data[end] = element;
-   }
+   if (size == 0)
+     if (end == data.length) end = 1;
+     else end += 1;
+   else if (start == 0)
+     start = data.length-1;
+   else
+     start--;
 
-   if(end == start){
-     //first deal with the fact that if theyre not on the ends
-     if(start != data.length - 1){
-       start += 1;
-     } else {
-       //then end is 0
-       start =  0;
-     }
-
-   }
+   data[start] = element;
+   size++;
  }
 
+ public void addLast(E element) {
+   if (element == null) throw new NullPointerException();
+   if (size == data.length) // we are full
+     resize();
 
+   if (end == data.length) {
+     data[0] = element;
+     end = 1;
+   } else {
+     data[end] = element;
+     end++;
+   }
 
-
-public void addFirst(E element) throws NullPointerException{
-
-  if(element == null){
-    throw new NullPointerException("Can't add a null");
-  }
-
-  if(data[start] == null){
-    data[start] = element;
-    size++;
-    return;
-  }
-
-  if(isFull()){
-    data = resize();
-
-  }
-  size += 1;
-  if(start > 0){
-    start--;
-    data[start] = element;
-  } else {
-  if(start == 0){
-    start = data.length - 1;
-    data[start] = element;
-  }
-}
-//you have to now deal with the case if end = start after you adds
-if(end == start){
-  //first deal with the fact that if theyre not on the ends
-  if(end != 0){
-    end -= 1;
-  } else {
-    //then end is 0
-    end = data.length - 1;
-  }
-
-}
+   size++;
+ }
 
 //System.out.println(Arrays.toString(data));
 //System.out.println("start : " + data[start]);
@@ -117,7 +75,7 @@ if(end == start){
 
 //OK, so resize is the issue
 
-}
+
 public E getLast() throws NoSuchElementException{
   if(size == 0) throw new NoSuchElementException("que is empty");
   return data[end];
