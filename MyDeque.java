@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 
@@ -108,7 +107,24 @@ if(end == start){
 //OK, so resize is the issue
 
 }
+public E getLast() throws NoSuchElementException{
+  if(size == 0) throw new NoSuchElementException("que is empty");
+  return data[end];
+}
 
+public E removeLast() throws NoSuchElementException{
+  E val = getFirst();
+  data[end] = null;
+  if(end == 0){
+    end = data.length - 1;
+    size--;
+    return val;
+  }
+
+  end--;
+  size --;
+  return val;
+}
 
 public E getFirst() throws NoSuchElementException{
   if(size == 0) throw new NoSuchElementException("que is empty");
@@ -232,6 +248,17 @@ public E removeFirst() throws NoSuchElementException{
    System.out.println("size: " + test.size());
    System.out.println(test.removeFirst());
    System.out.println(test);
-   System.out.println(test.removeFirst());
+
+   System.out.println("\n");
    System.out.println("size: " + test.size());
+   System.out.println(test);
+   for(int i = 0; i < 10; i++){
+     test.addLast(i);
+   }
+   System.out.println(test);
+   test.removeLast();
+   System.out.println(test);
+   //System.out.println(test.removeFirst());
+  // System.out.println("size: " + test.size());
+}
 }
